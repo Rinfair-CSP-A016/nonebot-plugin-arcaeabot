@@ -1,26 +1,34 @@
 # Change
+
 ## [2.0.1](https://pypi.org/project/nonebot-plugin-arcaeabot/2.0.1/)
 - 舍弃了616的slst，现在谱面定数显示更具体了
+
 ## [2.0.0](https://pypi.org/project/nonebot-plugin-arcaeabot/2.0.0/)
 - 我们优化了项目结构（感谢[RocksonLee](https://github.com/RocksonLee)的PR）
 - 更换了config的填写方式，使用yaml文件配置，详见README
 - 注意：您可能需要完全卸载插件（在site-packages中删除插件）并重新安装
+
 ## [1.2.1](https://pypi.org/project/nonebot-plugin-arcaeabot/1.2.1/)
 - 修复日文无法显示的问题
 - 修复了一处拼写错误
+
 ## [1.2.0](https://pypi.org/project/nonebot-plugin-arcaeabot/1.2.0/)
 - 新增user best查询
 - 修复图片中部分文本错位问题
 - 发送图片不再需要先存储到本地硬盘了
 - 优化错误提示
 - 移除不必要的依赖
+
 ## [1.1.1](https://pypi.org/project/nonebot-plugin-arcaeabot/1.1.1/)
 - Assets_Update时在后台可显示进度条
 - 查询失败时输出更详细的错误提示
 - 优化代码结构
+
 ## [1.1.0](https://pypi.org/project/nonebot-plugin-arcaeabot/1.1.0/)
 - 更新了B30的作图，并可查询至B39
+
 ## [1.0.0](https://pypi.org/project/nonebot-plugin-arcaeabot/1.0.0/)
 - 弃用Estertion，转用ArcaeaUnlimitedApi
+
 ## [0.2.8](https://pypi.org/project/nonebot-plugin-arcaeabot/0.2.8/)
 - 适配Nonebot 2.0.0-beta.2
