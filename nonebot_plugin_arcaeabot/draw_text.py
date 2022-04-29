@@ -44,7 +44,7 @@ def draw_song(song_info: Dict, difficulty: str = "all"):
         for i, value in enumerate(song_info["difficulties"]):
             _diff: float = value["rating"] / 10
             result += "[" + ["Past", "Present", "Future", "Beyond"][i] + "]: " + str(_diff) + "\n"
-            result += "获取详细信息请在添加难度后缀" + "\n"
+        result += "获取详细信息请在添加难度后缀" + "\n"
     else:
         difficulty = int(difficulty)
         cover_name = "3.jpg" if difficulty == 3 else "base.jpg"
