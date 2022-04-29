@@ -45,7 +45,8 @@ Arcaea 查分器。
 | /arc song {difficulty} {difficulty}         | 随机歌曲                                                          |
 
 ## To Do
-- 随机曲目推荐
+- 年报
+- 新的 recent 图片
 
 ## 参考代码
 
