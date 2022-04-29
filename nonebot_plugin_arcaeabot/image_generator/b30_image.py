@@ -127,9 +127,9 @@ def draw_score_detail(
     return image
 
 
-def draw_b30(data: Dict):
+def draw_user_b30(data: Dict):
     B30_bg = open_img(StaticPath.B30_bg)
-    user_best30 = UserBest30(**data["content"])
+    user_best30 = UserBest30(**data)
     # User Info
     best: float = user_best30.best30_avg
     recent: float = user_best30.recent10_avg

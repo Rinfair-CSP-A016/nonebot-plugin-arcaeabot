@@ -5,9 +5,9 @@ from typing import Dict
 from ..AUA import UserRecent, SongInfo, AccountInfo
 
 
-def draw_recent(data: Dict):
+def draw_user_recent(data: Dict):
     # User Info
-    user_recent: UserRecent = UserRecent(**data["content"])
+    user_recent: UserRecent = UserRecent(**data)
     account_info: AccountInfo = user_recent.account_info
     arcaea_id: str = account_info.code
     name: str = account_info.name
@@ -116,7 +116,7 @@ def draw_recent(data: Dict):
         40,
         230,
         40,
-        ["Past", "Persent", "Future", "Beyond"][difficulty] + " " + str(int(constant)),
+        ["Past", "Present", "Future", "Beyond"][difficulty] + " " + str(int(constant)),
         StaticPath.geosans_light,
     )
     image = draw_text(image, write_difficulty, (96, 75, 84, 255))
