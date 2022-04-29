@@ -5,7 +5,7 @@ from ..utils import open_img, DataText, draw_text, player_time_format, StaticPat
 
 def draw_user_recent(data: Dict):
     # User Info
-    user_recent: UserRecent = UserRecent(**data["content"])
+    user_recent: UserRecent = UserRecent(**data)
     account_info: AccountInfo = user_recent.account_info
     arcaea_id: str = account_info.code
     name: str = account_info.name
