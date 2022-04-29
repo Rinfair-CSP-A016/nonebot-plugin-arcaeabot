@@ -1,8 +1,8 @@
 from PIL import Image
-from .assets import StaticPath
-from .utils import open_img, DataText, draw_text, choice_ptt_background
+from ..assets import StaticPath
+from ..utils import open_img, DataText, draw_text, choice_ptt_background
 from typing import Dict
-from ..AUA import UserRecent, SongInfo, AccountInfo
+from ...AUA import UserRecent, SongInfo, AccountInfo
 
 
 def draw_user_recent(data: Dict):

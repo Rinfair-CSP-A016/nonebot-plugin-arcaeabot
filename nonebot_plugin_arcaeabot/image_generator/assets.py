@@ -66,6 +66,9 @@ class StaticPath:
     geosans_light = root.assets.font / ("GeosansLight.ttf")
     notosanscjksc_regular = root.assets.font / ("NotoSansCJKsc-Regular.otf")
     exo_semibold = root.assets.font / ("Exo-SemiBold.ttf")
+    # andreal style
+    rawv3bg_0 = root.assets.recent("RawV3Bg_0.png")
+    rawv3bg_1 = root.assets.recent("RawV3Bg_1.png")
 
     # Function
     @staticmethod
