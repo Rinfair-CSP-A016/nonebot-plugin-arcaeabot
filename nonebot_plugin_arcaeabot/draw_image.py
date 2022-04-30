@@ -38,7 +38,7 @@ class UserArcaeaInfo:
                 UserArcaeaInfo.querying.remove(arcaea_id)
                 return str(data["status"]) + ": " + data["message"]
             else:
-                image = image_generator.draw_single_song(data=UserRecent(**data))
+                image = image_generator.draw_single_song(data=UserRecent(**data["content"]))
                 buffer = BytesIO()
                 image.save(buffer, "png")
                 UserArcaeaInfo.querying.remove(arcaea_id)
@@ -58,7 +58,7 @@ class UserArcaeaInfo:
                 UserArcaeaInfo.querying.remove(arcaea_id)
                 return str(data["status"]) + ": " + data["message"]
             else:
-                image = image_generator.draw_single_song(data=UserBest(**data))
+                image = image_generator.draw_single_song(data=UserBest(**data["content"]))
                 buffer = BytesIO()
                 image.save(buffer, "png")
                 UserArcaeaInfo.querying.remove(arcaea_id)
