@@ -21,7 +21,7 @@ def draw_single_song(data: Union[UserRecent, UserBest]):
     if isinstance(data, UserRecent):
         score_info = data.recent_score[0]
     else:
-        score_info = data.record[0]
+        score_info = data.record
     song_id: str = score_info.song_id
     song_info: SongInfo = data.songinfo[0]
     song_name: str = song_info.name_en
