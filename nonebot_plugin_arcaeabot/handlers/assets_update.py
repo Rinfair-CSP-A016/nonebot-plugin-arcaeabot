@@ -15,7 +15,7 @@ async def assets_update_handler(
     args: list = str(args).split()
     if args[0] == "assets_update":
 
-        if len(args) == 2 and args[1] == 'all':
+        if len(args) == 2 and args[1] == "all":
             if path.exist(root.assets.song):
                 rmtree(root.assets.song)
             if path.exist(root.assets.char):
@@ -30,8 +30,8 @@ async def assets_update_handler(
         result_char = await check_char_update()
 
         await arc.finish(
-            MessageSegment.reply(event.message_id) +
-            "\n".join(
+            MessageSegment.reply(event.message_id)
+            + "\n".join(
                 [
                     f"成功更新 {len(result_song)} 张曲绘, ",
                     f"成功更新 {len(result_char)} 张立绘",

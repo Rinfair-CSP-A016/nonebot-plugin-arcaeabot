@@ -1,7 +1,15 @@
-from typing import Dict, Union
+from typing import Union
 from ...AUA import AccountInfo, UserRecent, SongInfo, UserBest
 from PIL import Image, ImageFilter
-from ..utils import open_img, DataText, draw_text, player_time_format, StaticPath, choice_ptt_background
+from ..utils import (
+    open_img,
+    DataText,
+    draw_text,
+    player_time_format,
+    StaticPath,
+    choice_ptt_background,
+)
+
 
 def draw_single_song(data: Union[UserRecent, UserBest]):
     # User Info
@@ -43,7 +51,7 @@ def draw_single_song(data: Union[UserRecent, UserBest]):
     fog = Image.new("RGBA", (600, 867), (255, 255, 255, 60))
     image.alpha_composite(fog)
     side = data.songinfo[0].side
-    card = open_img(StaticPath.rawv3bg_0 if side ==0 else StaticPath.rawv3bg_1)
+    card = open_img(StaticPath.rawv3bg_0 if side == 0 else StaticPath.rawv3bg_1)
     image.alpha_composite(card)
     image.alpha_composite(song_cover.resize((256, 256)), (172, 245))
     # Draw User Info
@@ -69,16 +77,31 @@ def draw_single_song(data: Union[UserRecent, UserBest]):
     # Draw Score Info
     write_PLAYPTT = DataText(65, 765, 20, "Play Ptt:", StaticPath.exo_regular)
     image = draw_text(image, write_PLAYPTT, (110, 110, 110))
-    write_ptt = DataText(160, 768, 17, str(round(song_rating, 4)), StaticPath.exo_regular)
+    write_ptt = DataText(
+        160, 768, 17, str(round(song_rating, 4)), StaticPath.exo_regular
+    )
     image = draw_text(image, write_ptt, (110, 110, 110))
     write_PLAYTIME = DataText(65, 820, 20, "Play Time:", StaticPath.exo_regular)
     image = draw_text(image, write_PLAYTIME, (110, 110, 110))
-    write_playtime = DataText(160, 823, 17, player_time_format(score_info.time_played), StaticPath.exo_regular)
+    write_playtime = DataText(
+        160, 823, 17, player_time_format(score_info.time_played), StaticPath.exo_regular
+    )
     image = draw_text(image, write_playtime, (110, 110, 110))
-    write_song_name = DataText(300, 520, 25, song_name, StaticPath.kazesawa_regular, "mt")
+    write_song_name = DataText(
+        300, 520, 25, song_name, StaticPath.kazesawa_regular, "mt"
+    )
     image = draw_text(image, write_song_name, "black")
-    write_difficulty = DataText(300, 560, 25, ["Past", "Present", "Future", "Beyond"][difficulty] + " | " + str(constant), StaticPath.kazesawa_regular, "mt")
-    diff_color = ((20, 165, 215), (120, 150, 80), (115, 35, 100), (166, 20, 49))[difficulty]
+    write_difficulty = DataText(
+        300,
+        560,
+        25,
+        ["Past", "Present", "Future", "Beyond"][difficulty] + " | " + str(constant),
+        StaticPath.kazesawa_regular,
+        "mt",
+    )
+    diff_color = ((20, 165, 215), (120, 150, 80), (115, 35, 100), (166, 20, 49))[
+        difficulty
+    ]
     image = draw_text(image, write_difficulty, diff_color)
     track_info = open_img(
         StaticPath.is_failed(
@@ -89,11 +112,25 @@ def draw_single_song(data: Union[UserRecent, UserBest]):
     track_info = track_info.resize((400, int(400 / origin_size_w * origin_size_h)))
     image.alpha_composite(track_info, (100, 615))
     clear_type = ("[TL]", "[NC]", "[FR]", "[PM]", "[EC]", "[HC]")[score_info.clear_type]
-    write_score = DataText(300 ,680,40,format(score, ",").replace(",", "'")+"  "+clear_type,StaticPath.exo_regular,"mt")
+    write_score = DataText(
+        300,
+        680,
+        40,
+        format(score, ",").replace(",", "'") + "  " + clear_type,
+        StaticPath.exo_regular,
+        "mt",
+    )
     image = draw_text(image, write_score, "black")
     write_PURE = DataText(380, 775, 20, "Pure", StaticPath.exo_medium, "ls")
     image = draw_text(image, write_PURE, "black")
-    write_pure_count = DataText(450, 775, 17, f"{perfect_count}(+{shiny_perfect_count})", StaticPath.exo_medium, "ls")
+    write_pure_count = DataText(
+        450,
+        775,
+        17,
+        f"{perfect_count}(+{shiny_perfect_count})",
+        StaticPath.exo_medium,
+        "ls",
+    )
     image = draw_text(image, write_pure_count, "black")
     write_FAR = DataText(380, 810, 20, "Far", StaticPath.exo_medium, "ls")
     image = draw_text(image, write_FAR, "black")

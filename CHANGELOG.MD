@@ -1,5 +1,10 @@
 # Change
 
+## [2.1.0](https://pypi.org/project/nonebot-plugin-arcaeabot/2.1.0/)
+- 新增arc random 随机推荐曲目
+- 新增arc song 曲目信息查询
+- 更改了Recent与Best图片
+
 ## [2.0.1](https://pypi.org/project/nonebot-plugin-arcaeabot/2.0.1/)
 - 舍弃了616的slst，现在谱面定数显示更具体了
 

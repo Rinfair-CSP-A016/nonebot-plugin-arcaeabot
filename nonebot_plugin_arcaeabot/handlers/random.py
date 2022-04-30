@@ -40,4 +40,6 @@ async def random_handler(bot: Bot, event: MessageEvent, args: Message = CommandA
                     n = n - 1
                     break
 
-        await arc.finish(MessageSegment.reply(event.message_id) + draw_song(song_info=song))
+        await arc.finish(
+            MessageSegment.reply(event.message_id) + draw_song(song_info=song)
+        )

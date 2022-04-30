@@ -1,14 +1,13 @@
 from PIL import Image
 from ..assets import StaticPath
 from ..utils import open_img, DataText, draw_text, choice_ptt_background
-from typing import Dict
-from ...AUA import UserRecent, SongInfo, AccountInfo
+from typing import Union
+from ...AUA import UserRecent, SongInfo, AccountInfo, UserBest
 
 
-def draw_user_recent(data: Dict):
+def draw_data(data: Union[UserRecent, UserBest]):
     # User Info
-    user_recent: UserRecent = UserRecent(**data)
-    account_info: AccountInfo = user_recent.account_info
+    account_info: AccountInfo = data.account_info
     arcaea_id: str = account_info.code
     name: str = account_info.name
     character = account_info.character
@@ -21,19 +20,22 @@ def draw_user_recent(data: Dict):
     )
     rating: str = account_info.rating
     # Score Info
-    recent_score = user_recent.recent_score[0]
-    song_id: str = recent_score.song_id
-    song_info: SongInfo = user_recent.songinfo[0]
+    if isinstance(data, UserRecent):
+        score_info = data.recent_score[0]
+    else:
+        score_info = data.record
+    song_id: str = score_info.song_id
+    song_info: SongInfo = data.songinfo[0]
     song_name: str = song_info.name_en
     author_name: str = song_info.artist
-    difficulty: int = recent_score.difficulty
-    score: int = recent_score.score
-    shiny_perfect_count: int = recent_score.shiny_perfect_count
-    perfect_count: int = recent_score.perfect_count
-    near_count: int = recent_score.near_count
-    miss_count: int = recent_score.miss_count
-    health: int = recent_score.health
-    song_rating: float = recent_score.rating
+    difficulty: int = score_info.difficulty
+    score: int = score_info.score
+    shiny_perfect_count: int = score_info.shiny_perfect_count
+    perfect_count: int = score_info.perfect_count
+    near_count: int = score_info.near_count
+    miss_count: int = score_info.miss_count
+    health: int = score_info.health
+    song_rating: float = score_info.rating
     constant: float = song_info.rating / 10
     full_character = (
         f"{character}u.png"

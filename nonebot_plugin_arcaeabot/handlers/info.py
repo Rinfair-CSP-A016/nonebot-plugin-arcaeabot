@@ -13,4 +13,7 @@ async def info_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
         if not user_info:
             await arc.finish(MessageSegment.reply(event.message_id) + "你还没绑定呢！")
 
-        await arc.finish(MessageSegment.reply(event.message_id) + f"id: {user_info.arcaea_id}, 用户名: {user_info.arcaea_name}。")
+        await arc.finish(
+            MessageSegment.reply(event.message_id)
+            + f"id: {user_info.arcaea_id}, 用户名: {user_info.arcaea_name}。"
+        )

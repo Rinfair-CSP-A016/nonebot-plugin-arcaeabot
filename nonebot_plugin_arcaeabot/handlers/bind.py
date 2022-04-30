@@ -28,4 +28,7 @@ async def bind_handler(bot: Bot, event: MessageEvent, args=CommandArg()):
             user_qq=event.user_id, arcaea_id=arc_id, arcaea_name=player_name
         ).execute()
 
-        await arc.finish(MessageSegment.reply(event.message_id) + f"绑定成功, 用户名: {player_name}, id: {arc_id}")
+        await arc.finish(
+            MessageSegment.reply(event.message_id)
+            + f"绑定成功, 用户名: {player_name}, id: {arc_id}"
+        )

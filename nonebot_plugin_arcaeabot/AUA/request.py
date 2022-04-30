@@ -33,16 +33,15 @@ async def get_user_b30(
         _recent = "&withrecent=true" if recent is True else ""
         # request
         res = await client.get(
-                url=f"{aua_url}/botarcapi/user/best30?usercode={arcaea_id}{_overflow}{_recent}&withsonginfo=true",
-                headers=headers,
-                timeout=100,
-            )
+            url=f"{aua_url}/botarcapi/user/best30?usercode={arcaea_id}{_overflow}{_recent}&withsonginfo=true",
+            headers=headers,
+            timeout=100,
+        )
         return res.json()
 
 
 async def get_user_recent(arcaea_id: str) -> List[Dict]:
     return await get_user_info(arcaea_id=arcaea_id, recent=True)
-
 
 
 async def get_user_best(
@@ -77,4 +76,3 @@ async def get_song_list() -> List[Dict]:
             timeout=100,
         )
         return res.json()
-

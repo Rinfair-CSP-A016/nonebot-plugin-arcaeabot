@@ -20,15 +20,21 @@ async def song_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
         for s in data["songs"]:
             if s["song_id"] == args[1].strip():
                 song = s
-            if s["difficulties"][0]["name_en"] == args[1].strip() or s["difficulties"][0]["name_jp"] == args[1].strip():
+            if (
+                s["difficulties"][0]["name_en"] == args[1].strip()
+                or s["difficulties"][0]["name_jp"] == args[1].strip()
+            ):
                 song = s
             if len(s["difficulties"]) == 4:
-                if s["difficulties"][3]["name_en"] == args[1].strip() or s["difficulties"][3]["name_jp"] == args[1].strip():
+                if (
+                    s["difficulties"][3]["name_en"] == args[1].strip()
+                    or s["difficulties"][3]["name_jp"] == args[1].strip()
+                ):
                     song = s
             for alias in s["alias"]:
                 if alias == args[1].strip():
                     song = s
-                    
+
         # check
         if song == "no_song":
             await arc.finish(MessageSegment.reply(event.message_id) + "曲目不存在！")
@@ -49,4 +55,7 @@ async def song_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
         else:
             await arc.finish(MessageSegment.reply(event.message_id) + "参数输入有误！")
 
-        await arc.finish(MessageSegment.reply(event.message_id) + draw_song(song_info=song, difficulty=difficulty))
+        await arc.finish(
+            MessageSegment.reply(event.message_id)
+            + draw_song(song_info=song, difficulty=difficulty)
+        )

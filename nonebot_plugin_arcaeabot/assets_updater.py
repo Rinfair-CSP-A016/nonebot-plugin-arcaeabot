@@ -6,6 +6,7 @@ from .config import config
 from ._RHelper import RHelper
 from .AUA import get_song_list
 import json
+
 root = RHelper()
 
 

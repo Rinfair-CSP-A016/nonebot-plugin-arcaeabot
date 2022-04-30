@@ -6,4 +6,10 @@ from .schema.api.v5 import (
     SongInfo,
     SongScore,
 )
-from .request import get_user_info, get_user_b30, get_user_recent, get_user_best, get_song_list
+from .request import (
+    get_user_info,
+    get_user_b30,
+    get_user_recent,
+    get_user_best,
+    get_song_list,
+)

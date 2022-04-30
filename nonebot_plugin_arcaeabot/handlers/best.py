@@ -13,14 +13,14 @@ async def best_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
     args: list = str(args).split()
     if args[0] == "best":
         user_info = UserInfo.get_or_none(UserInfo.user_qq == event.user_id)
-        '''
+        """
         song_alias = (
             alias.get_or_none(alias.alias == args[1].strip())
             if alias.get_or_none(alias.alias == args[1].strip())
             else alias.get_or_none(alias.sid == args[1].strip())
         )
         song_id = song_alias.sid if song_alias else args[1].strip()
-        '''
+        """
         slst_json = root.assets / ("slst.json")
         with open(slst_json, "r") as file:
             data = json.load(file)
@@ -58,7 +58,9 @@ async def best_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
             await arc.finish(MessageSegment.reply(event.message_id) + "你还没绑定呢！")
 
         if UserArcaeaInfo.is_querying(user_info.arcaea_id):
-            await arc.finish(MessageSegment.reply(event.message_id) + "您已在查询队列, 请勿重复发起查询。")
+            await arc.finish(
+                MessageSegment.reply(event.message_id) + "您已在查询队列, 请勿重复发起查询。"
+            )
 
         # Query
         result = await UserArcaeaInfo.draw_user_best(
@@ -67,6 +69,3 @@ async def best_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
             difficulty=str(difficulty),
         )
         await arc.finish(MessageSegment.reply(event.message_id) + result)
-
-            
-
