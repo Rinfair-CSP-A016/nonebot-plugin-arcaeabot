@@ -25,6 +25,7 @@ async def best_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
         with open(slst_json, "r") as file:
             data = json.load(file)
 
+        song = "no_song"
         for s in data["songs"]:
             if s["song_id"] == args[1].strip():
                 song = s
@@ -33,6 +34,8 @@ async def best_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
                     song = s
 
         # check
+        if song == "no_song":
+            await arc.finish(MessageSegment.reply(event.message_id) + "曲目不存在！")
         if len(args) == 2:
             difficulty = 2
         elif len(args) != 3:
@@ -49,6 +52,7 @@ async def best_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
             difficulty = 0
         else:
             await arc.finish(MessageSegment.reply(event.message_id) + "参数输入有误！")
+
         # Exception
         if not user_info:
             await arc.finish(MessageSegment.reply(event.message_id) + "你还没绑定呢！")
