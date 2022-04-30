@@ -1,7 +1,7 @@
 from nonebot.adapters.onebot.v11 import MessageSegment
 from . import image_generator
 from io import BytesIO
-from .AUA import get_user_best, get_user_b30, get_user_recent
+from .AUA import get_user_best, get_user_b30, get_user_recent, UserRecent, UserBest
 
 
 class UserArcaeaInfo:
@@ -38,7 +38,7 @@ class UserArcaeaInfo:
                 UserArcaeaInfo.querying.remove(arcaea_id)
                 return str(data["status"]) + ": " + data["message"]
             else:
-                image = image_generator.draw_user_recent(data=data["content"])
+                image = image_generator.draw_single_song(data=UserRecent(**data))
                 buffer = BytesIO()
                 image.save(buffer, "png")
                 UserArcaeaInfo.querying.remove(arcaea_id)
@@ -58,7 +58,7 @@ class UserArcaeaInfo:
                 UserArcaeaInfo.querying.remove(arcaea_id)
                 return str(data["status"]) + ": " + data["message"]
             else:
-                image = image_generator.draw_user_best(data=data["content"])
+                image = image_generator.draw_single_song(data=UserBest(**data))
                 buffer = BytesIO()
                 image.save(buffer, "png")
                 UserArcaeaInfo.querying.remove(arcaea_id)

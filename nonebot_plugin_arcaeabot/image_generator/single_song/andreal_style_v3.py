@@ -1,12 +1,11 @@
-from typing import Dict
-from ...AUA import AccountInfo, UserRecent, SongInfo
+from typing import Dict, Union
+from ...AUA import AccountInfo, UserRecent, SongInfo, UserBest
 from PIL import Image, ImageFilter
 from ..utils import open_img, DataText, draw_text, player_time_format, StaticPath, choice_ptt_background
 
-def draw_user_recent(data: Dict):
+def draw_single_song(data: Union[UserRecent, UserBest]):
     # User Info
-    user_recent: UserRecent = UserRecent(**data)
-    account_info: AccountInfo = user_recent.account_info
+    account_info: AccountInfo = data.account_info
     arcaea_id: str = account_info.code
     name: str = account_info.name
     character = account_info.character
@@ -19,18 +18,18 @@ def draw_user_recent(data: Dict):
     )
     rating: str = account_info.rating
     # Score Info
-    recent_score = user_recent.recent_score[0]
-    song_id: str = recent_score.song_id
-    song_info: SongInfo = user_recent.songinfo[0]
+    score_info = data.recent_score[0] or data.record[0]
+    song_id: str = score_info.song_id
+    song_info: SongInfo = data.songinfo[0]
     song_name: str = song_info.name_en
-    difficulty: int = recent_score.difficulty
-    score: int = recent_score.score
-    shiny_perfect_count: int = recent_score.shiny_perfect_count
-    perfect_count: int = recent_score.perfect_count
-    near_count: int = recent_score.near_count
-    miss_count: int = recent_score.miss_count
-    health: int = recent_score.health
-    song_rating: float = recent_score.rating
+    difficulty: int = score_info.difficulty
+    score: int = score_info.score
+    shiny_perfect_count: int = score_info.shiny_perfect_count
+    perfect_count: int = score_info.perfect_count
+    near_count: int = score_info.near_count
+    miss_count: int = score_info.miss_count
+    health: int = score_info.health
+    song_rating: float = score_info.rating
     constant: float = song_info.rating / 10
     # Back Ground
     cover_name = "3.jpg" if difficulty == 3 else "base.jpg"
@@ -40,7 +39,7 @@ def draw_user_recent(data: Dict):
     image = image.filter(ImageFilter.GaussianBlur(radius=10))
     fog = Image.new("RGBA", (600, 867), (255, 255, 255, 60))
     image.alpha_composite(fog)
-    side = user_recent.songinfo[0].side
+    side = data.songinfo[0].side
     card = open_img(StaticPath.rawv3bg_0 if side ==0 else StaticPath.rawv3bg_1)
     image.alpha_composite(card)
     image.alpha_composite(song_cover.resize((256, 256)), (172, 245))
@@ -71,7 +70,7 @@ def draw_user_recent(data: Dict):
     image = draw_text(image, write_ptt, (110, 110, 110))
     write_PLAYTIME = DataText(65, 820, 20, "Play Time:", StaticPath.exo_regular)
     image = draw_text(image, write_PLAYTIME, (110, 110, 110))
-    write_playtime = DataText(160, 823, 17, player_time_format(recent_score.time_played), StaticPath.exo_regular)
+    write_playtime = DataText(160, 823, 17, player_time_format(score_info.time_played), StaticPath.exo_regular)
     image = draw_text(image, write_playtime, (110, 110, 110))
     write_song_name = DataText(300, 520, 25, song_name, StaticPath.kazesawa_regular, "mt")
     image = draw_text(image, write_song_name, "black")
@@ -86,7 +85,7 @@ def draw_user_recent(data: Dict):
     origin_size_w, origin_size_h = track_info.size
     track_info = track_info.resize((400, int(400 / origin_size_w * origin_size_h)))
     image.alpha_composite(track_info, (100, 615))
-    clear_type = ("[TL]", "[NC]", "[FR]", "[PM]", "[EC]", "[HC]")[recent_score.clear_type]
+    clear_type = ("[TL]", "[NC]", "[FR]", "[PM]", "[EC]", "[HC]")[score_info.clear_type]
     write_score = DataText(300 ,680,40,format(score, ",").replace(",", "'")+"  "+clear_type,StaticPath.exo_regular,"mt")
     image = draw_text(image, write_score, "black")
     write_PURE = DataText(380, 775, 20, "Pure", StaticPath.exo_medium, "ls")

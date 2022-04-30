@@ -1,3 +1,3 @@
 from .b30_image import draw_user_b30
-from .recent_image.andreal_style_v3 import draw_user_recent
+from .single_song.andreal_style_v3 import draw_single_song
 from .best_image import draw_user_best
