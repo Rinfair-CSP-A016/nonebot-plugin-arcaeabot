@@ -16,44 +16,47 @@ async def song_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
         with open(slst_json, "r") as file:
             data = json.load(file)
 
+        difficulty = 233
+        if args[-1].strip().lower() == "byd":
+            difficulty = 3
+        elif args[-1].strip().lower() == "ftr":
+            difficulty = 2
+        elif args[-1].strip().lower() == "prs":
+            difficulty = 1
+        elif args[-1].strip().lower() == "pst":
+            difficulty = 0
+
+        if difficulty == range(0, 3):
+            song_id = " ".join(args[1:-2])
+        else:
+            song_id = " ".join(args[1:-1])
+            difficulty = 2
+
         song = "no_song"
         for s in data["songs"]:
-            if s["song_id"] == args[1].strip():
+            if s["song_id"] == song_id:
                 song = s
             if (
-                s["difficulties"][0]["name_en"] == args[1].strip()
-                or s["difficulties"][0]["name_jp"] == args[1].strip()
+                s["difficulties"][0]["name_en"] == song_id
+                or s["difficulties"][0]["name_jp"] == song_id
             ):
                 song = s
             if len(s["difficulties"]) == 4:
                 if (
-                    s["difficulties"][3]["name_en"] == args[1].strip()
-                    or s["difficulties"][3]["name_jp"] == args[1].strip()
+                    s["difficulties"][3]["name_en"] == song_id
+                    or s["difficulties"][3]["name_jp"] == song_id
                 ):
                     song = s
             for alias in s["alias"]:
-                if alias == args[1].strip():
+                if alias == song_id:
                     song = s
 
         # check
         if song == "no_song":
             await arc.finish(MessageSegment.reply(event.message_id) + "曲目不存在！")
-        if len(args) == 2:
-            difficulty = "all"
-        elif len(args) != 3:
-            await arc.finish(MessageSegment.reply(event.message_id) + "不支持的命令参数")
-        elif args[2].strip().lower() == "byd":
-            if len(song["difficulties"]) == 3:
-                await arc.finish(MessageSegment.reply(event.message_id) + "难度不存在！")
-            difficulty = "3"
-        elif args[2].strip().lower() == "ftr":
-            difficulty = "2"
-        elif args[2].strip().lower() == "prs":
-            difficulty = "1"
-        elif args[2].strip().lower() == "pst":
-            difficulty = "0"
-        else:
-            await arc.finish(MessageSegment.reply(event.message_id) + "参数输入有误！")
+
+        if len(song["difficulties"]) == 3 and difficulty == 3:
+            await arc.finish(MessageSegment.reply(event.message_id) + "难度不存在！")
 
         await arc.finish(
             MessageSegment.reply(event.message_id)

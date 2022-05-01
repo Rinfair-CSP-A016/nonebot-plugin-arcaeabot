@@ -2,6 +2,7 @@ from nonebot.adapters.onebot.v11 import Bot, MessageEvent, Message, MessageSegme
 from nonebot.params import CommandArg
 from ..matcher import arc
 from ..data import UserInfo
+from ..utils import is_error
 
 
 async def unbind_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg()):
@@ -10,8 +11,8 @@ async def unbind_handler(bot: Bot, event: MessageEvent, args: Message = CommandA
         user_info = UserInfo.get_or_none(UserInfo.user_qq == event.user_id)
 
         # Expection
-        if len(args) != 1:
-            await arc.finish(MessageSegment.reply(event.message_id) + "不支持的命令参数")
+        if is_error(mode="more") and len(args) > 1:
+            await arc.send(MessageSegment.reply(event.message_id) + "不支持的命令参数")
 
         if not user_info:
             await arc.finish(MessageSegment.reply(event.message_id) + "你还没绑定呢！")

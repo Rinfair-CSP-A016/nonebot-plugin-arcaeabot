@@ -1,8 +1,10 @@
 from nonebot.adapters.onebot.v11 import Bot, MessageEvent, Message, MessageSegment
 from nonebot.params import CommandArg
+from nonebot.log import logger
 from ..matcher import arc
 from ..config import config
 from ..draw_text import draw_help
+from ..utils import is_error
 
 
 async def pre_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg()):
@@ -10,23 +12,11 @@ async def pre_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg(
     if len(args) == 0:
         await arc.finish(MessageSegment.reply(event.message_id) + draw_help())
 
-    elif args[0] not in [
-        "help",
-        "info",
-        "recent",
-        "b30",
-        "bind",
-        "unbind",
-        "assets_update",
-        "best",
-        "b40",
-        "random",
-        "song",
-        "songs",
-    ]:
-        await arc.finish("不支持的命令参数")
-
     aua_ua = config.get_config("aua_ua")
     aua_url = config.get_config("aua_url")
-    if aua_ua == "SECRET" or aua_url == "URL":
-        await arc.finish("ArcaeaUnlimitedApi is not configured!")
+    if (aua_ua == "SECRET" or aua_url == "URL"):
+        if is_error():
+            await arc.finish("ArcaeaUnlimitedApi is not configured!")
+        else:
+            await logger("ArcaeaUnlimitedApi is not configured!")
+            await arc.finish()

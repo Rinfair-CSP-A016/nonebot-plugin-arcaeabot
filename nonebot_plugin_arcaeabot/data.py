@@ -23,7 +23,7 @@ class ArcInfo(pw.Model):
 
     class Meta:
         database = db
-        primary_key = pw.CompositeKey("arcaea_name", "arcaea_id")
+        primary_key = pw.CompositeKey("arcaea_name", "arcaea_id", "ptt")
 
 
 class UserConfig(pw.Model):
