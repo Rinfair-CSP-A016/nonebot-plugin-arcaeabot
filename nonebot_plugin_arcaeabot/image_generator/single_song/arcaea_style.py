@@ -162,7 +162,7 @@ def draw_data(data: Union[UserRecent, UserBest]):
         StaticPath.geosans_light,
     )
     image = draw_text(image, write_miss_count, (137, 137, 137, 255))
-    raw_ptt = str(round(rating / 100, 2)).split(".")
+    raw_ptt = f"{(rating/100):.2f}".split(".")
     write_ptt_head = DataText(
         690, 100, 30, raw_ptt[0], StaticPath.exo_semibold, anchor="rs"
     )

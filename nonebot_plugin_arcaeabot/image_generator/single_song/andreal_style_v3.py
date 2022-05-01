@@ -61,7 +61,7 @@ def draw_single_song(data: Union[UserRecent, UserBest]):
         StaticPath.select_image("ptt", choice_ptt_background(rating))
     ).resize((75, 75))
     image.alpha_composite(ptt, (135, 135))
-    raw_ptt = str(round(rating / 100, 2)).split(".")
+    raw_ptt = f"{(rating/100):.2f}".split(".")
     write_ptt_head = DataText(
         170, 180, 25, raw_ptt[0], StaticPath.exo_semibold, anchor="rs"
     )

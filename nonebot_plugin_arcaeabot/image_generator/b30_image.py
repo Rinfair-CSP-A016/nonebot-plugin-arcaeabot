@@ -153,7 +153,7 @@ def draw_user_b30(data: Dict):
         StaticPath.ptt_dir / choice_ptt_background(rating)
     ).resize((150, 150))
     B30_bg.alpha_composite(ptt_background, (200, 280))
-    raw_ptt = str(round(rating / 100, 2)).split(".")
+    raw_ptt = f"{(rating/100):.2f}".split(".")
     write_ptt_head = DataText(
         270, 370, 50, raw_ptt[0], StaticPath.exo_medium, anchor="rs"
     )
