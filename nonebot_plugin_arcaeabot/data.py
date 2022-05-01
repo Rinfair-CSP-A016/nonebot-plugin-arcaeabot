@@ -17,20 +17,22 @@ class UserInfo(pw.Model):
         database = db
         primary_key = pw.CompositeKey("user_qq", "arcaea_id")
 
+class UserConfig(pw.Model):
+    user_qq = pw.IntegerField()
+    single_song_theme = pw.CharField()
+    best30_theme = pw.CharField()
+
+
+    class Meta:
+        database = db
+        primary_key = pw.CompositeKey("user_qq", "single_song_theme", "best30_theme")
 
 if not path.exists(root.database / ("user_data.db")):
     logger.info("创建数据库于", root.database / ("user_data.db"))
     db.connect()
     db.create_tables([UserInfo])
     db.close()
-
-alias_db = pw.SqliteDatabase(root.database / "arcsong.db")
-
-
-class alias(pw.Model):
-    sid = pw.IntegerField()
-    alias = pw.CharField()
-
-    class Meta:
-        database = alias_db
-        primary_key = pw.CompositeKey("sid", "alias")
+else:
+    db.connect()
+    if "userconfig" not in db.get_tables():
+        db.create_tables([UserConfig])
