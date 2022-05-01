@@ -39,10 +39,10 @@ async def calc_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
 
         if ptt != 60 and ptt2 != 60:
             if ptt - ptt2 <= -1:
-                reply = "曲面定数为 [%.2f]\n单曲 Rating 为 [%.2lf]\n计算结果: %d" % (ptt, ptt2, calc(ptt=ptt, ptt2=ptt2))
+                reply = "曲面定数：%.2f\n单曲 Rating ：%.2lf\n计算结果: %d" % (ptt, ptt2, calc(ptt=ptt, ptt2=ptt2))
                 await arc.finish(MessageSegment.reply(event.message_id) + reply)
             else:
-                reply = "曲面定数为 [%.2f]\n单曲 Rating 为 [%.2lf]\n计算结果: %d" % (ptt, ptt2, calc(ptt=ptt, ptt2=ptt2))
+                reply = "曲面定数：%.2f\n单曲 Rating ：%.2lf\n计算结果: %d" % (ptt, ptt2, calc(ptt=ptt, ptt2=ptt2))
                 await arc.finish(MessageSegment.reply(event.message_id) + reply)
 
         if score == 60 or ptt == 60:
@@ -52,20 +52,20 @@ async def calc_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
             score = 10000000
 
         if score >= 9800000:
-            reply = "曲面定数为 [%.2f]\n单曲分数为 [%d]\n计算结果: %.2lf" % (ptt, score, calc(ptt=ptt, score=score))
+            reply = "曲面定数：%.2f\n单曲分数：%d\n计算结果: %.2lf" % (ptt, score, calc(ptt=ptt, score=score))
             await arc.finish(MessageSegment.reply(event.message_id) + reply)
 
         if score >= 1200:
-            reply = "曲面定数为 [%.2f]\n单曲分数为 [%d]\n计算结果: %.2lf" % (ptt, score, calc(ptt=ptt, score=score))
+            reply = "曲面定数：%.2f\n单曲分数：%d\n计算结果: %.2lf" % (ptt, score, calc(ptt=ptt, score=score))
             await arc.finish(MessageSegment.reply(event.message_id) + reply)
 
         if score >= 1000:
             score = 1000
 
         if score >= 980:
-            reply = "曲面定数为 [%.2f]\n单曲分数为 [%d]w\n计算结果: %.2lf" % (ptt, score, (score * 10000 - 9800000) / 200000 + ptt)
+            reply = "曲面定数：%.2f\n单曲分数：%dw\n计算结果: %.2lf" % (ptt, score, (score * 10000 - 9800000) / 200000 + ptt)
             await arc.finish(MessageSegment.reply(event.message_id) + reply)
 
         if score > 60:
-            reply = "曲面定数为 [%.2f]\n单曲分数为 [%d]w\n计算结果: %.2lf" % (ptt, score, (score * 10000 - 9500000) / 300000 + ptt)
+            reply = "曲面定数：%.2f\n单曲分数：%dw\n计算结果: %.2lf" % (ptt, score, (score * 10000 - 9500000) / 300000 + ptt)
             await arc.finish(MessageSegment.reply(event.message_id) + reply)

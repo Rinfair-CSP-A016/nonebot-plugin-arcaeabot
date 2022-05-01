@@ -26,11 +26,10 @@ async def song_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
         elif args[-1].strip().lower() == "pst":
             difficulty = 0
 
-        if difficulty == range(0, 3):
-            song_id = " ".join(args[1:-2])
-        else:
+        if 0 <= difficulty <= 3:
             song_id = " ".join(args[1:-1])
-            difficulty = 2
+        else:
+            song_id = " ".join(args[1:])
 
         song = "no_song"
         for s in data["songs"]:
@@ -57,6 +56,9 @@ async def song_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
 
         if len(song["difficulties"]) == 3 and difficulty == 3:
             await arc.finish(MessageSegment.reply(event.message_id) + "难度不存在！")
+
+        if difficulty == 233:
+            difficulty = "all"
 
         await arc.finish(
             MessageSegment.reply(event.message_id)

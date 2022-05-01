@@ -19,26 +19,18 @@ async def random_handler(bot: Bot, event: MessageEvent, args: Message = CommandA
         max: int = 1150
 
         if len(args) == 2:
-
             if is_float_num(args[1]):
-                await arc.finish(MessageSegment.reply(event.message_id) + "参数类型错误！")
-
-            min = float(args[1].strip()) * 10
-            max = float(args[1].strip()) * 10
-
-        reply = ""
+                min = float(args[1].strip()) * 10
+                max = float(args[1].strip()) * 10
+            else:
+                min, max = int(args[1]), int(args[1])
 
         if len(args) >= 3:
 
             if is_float_num(args[1]):
-                reply += args[1] + " "
-            if is_float_num(args[2]):
-                reply += args[2] + " "
-            if reply:
-                await arc.finish(MessageSegment.reply(event.message_id) + reply + "参数类型错误！")
-
-            min = float(args[1].strip()) * 10
-            max = float(args[2].strip()) * 10
+                min = float(args[1].strip()) * 10
+            if is_float_num(args[2]): 
+                max = float(args[2].strip()) * 10
 
         if is_error(mode="more") and len(args) >= 4:
             await arc.send(MessageSegment.reply(event.message_id) + "过多的命令参数！")
@@ -49,7 +41,7 @@ async def random_handler(bot: Bot, event: MessageEvent, args: Message = CommandA
         n = 0
         for s in slst["songs"]:
             for l in s["difficulties"]:
-                if l["rating"] == range(min, max):
+                if min <= l["rating"] <= max:
                     n = n + 1
                     break
 
@@ -58,7 +50,7 @@ async def random_handler(bot: Bot, event: MessageEvent, args: Message = CommandA
 
         for s in slst["songs"]:
             for l in s["difficulties"]:
-                if l["rating"] == range(min, max):
+                if min <= l["rating"] <= max:
                     if n == 0:
                         song = s
                     n = n - 1

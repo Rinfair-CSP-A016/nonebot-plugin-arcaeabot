@@ -29,11 +29,10 @@ async def best_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
         elif args[-1].strip().lower() == "pst":
             difficulty = 0
 
-        if difficulty == range(0, 3):
-            song_id = " ".join(args[1:-2])
-        else:
+        if 0 <= difficulty <= 3:
             song_id = " ".join(args[1:-1])
-            difficulty = 2
+        else:
+            song_id = " ".join(args[1:])
 
         song = "no_song"
         for s in data["songs"]:
@@ -53,7 +52,6 @@ async def best_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
             for alias in s["alias"]:
                 if alias == song_id:
                     song = s
-
         # check
         if song == "no_song":
             await arc.finish(MessageSegment.reply(event.message_id) + "曲目不存在！")

@@ -10,7 +10,9 @@ from .handlers import (
     b30_handler,
     best_handler,
     song_handler,
+    calc_handler,
     random_handler,
+    end_handler,
 )
 
 
@@ -24,4 +26,6 @@ arc.handle()(recent_handler)
 arc.handle()(b30_handler)
 arc.handle()(best_handler)
 arc.handle()(song_handler)
+arc.handle()(calc_handler)
 arc.handle()(random_handler)
+arc.handle()(end_handler)
