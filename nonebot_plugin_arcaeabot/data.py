@@ -20,6 +20,7 @@ class UserInfo(pw.Model):
 class ArcInfo(pw.Model):
     arcaea_name = pw.CharField()
     arcaea_id = pw.CharField()
+    ptt = pw.IntegerField()  # ptt
 
     class Meta:
         database = db

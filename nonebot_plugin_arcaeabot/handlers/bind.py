@@ -39,7 +39,7 @@ async def bind_handler(bot: Bot, event: MessageEvent, args=CommandArg()):
                 await arc.finish(str(res["status"]) + ": " + res["message"])
 
             arc_name = res["content"]["account_info"]["name"]
-            ArcInfo.replace(arcaea_id=arc_id, arcaea_name=arc_name).execute()
+            ArcInfo.replace(arcaea_id=arc_id, arcaea_name=arc_name, ptt=res["content"]["account_info"]["rating"]).execute()
 
         UserInfo.delete().where(UserInfo.user_qq == event.user_id).execute()
         UserInfo.replace(user_qq=event.user_id, arcaea_id=arc_id).execute()

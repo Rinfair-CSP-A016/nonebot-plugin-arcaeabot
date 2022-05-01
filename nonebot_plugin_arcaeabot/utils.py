@@ -1,5 +1,5 @@
-from _RHelper import RHelper
-from config import config
+from ._RHelper import RHelper
+from .config import config
 
 root = RHelper()
 
@@ -33,8 +33,8 @@ error_code = {
 
 
 def is_error(mode: str = "basic") -> bool:
-    em = config.get_config("error_messsage").lower()
-    m = config.get_config("more_error_messsage").lower()
+    em = config.get_config("error_message").lower()
+    m = config.get_config("more_error_message").lower()
     if em == "true":
         if m == "false" and mode == "more":
             return False
@@ -46,7 +46,7 @@ def is_error(mode: str = "basic") -> bool:
 
 def is_float_num(str):
     s = str.split('.')
-    if len(s) > 2:
+    if len(s) != 2:
         return False
     else:
         for si in s:

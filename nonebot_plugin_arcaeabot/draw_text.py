@@ -22,16 +22,17 @@ def time_format(time_stamp: int) -> str:
 def draw_help():
     return "\n".join(
         [
-            "/arc bind <arcaea id> 进行绑定。",
-            "/arc unbind 解除绑定。",
-            "/arc info 查看绑定信息。",
-            "/arc recent 查询上一次游玩记录。",
-            "/arc b30 查询 best 30 记录。",
+            "/arc bind <arcaea id> 进行绑定",
+            "/arc unbind 解除绑定",
+            "/arc info 查看绑定信息",
+            "/arc recent 查询上一次游玩记录",
+            "/arc b30 查询 best 30 记录",
             "/arc assets_update 更新曲绘与立绘资源",
             "/arc best <曲名> [难度] 查询单曲最高分",
             "/arc song <曲名> [难度] 查询信息",
             "/arc random [难度] 随机指定难度的歌曲",
             "/arc random [难度min] [难度max] 随机指定难度区间的歌曲",
+            "/arc calc <曲面定数> [分数/单曲ptt] 定数计算",
         ]
     )
 
