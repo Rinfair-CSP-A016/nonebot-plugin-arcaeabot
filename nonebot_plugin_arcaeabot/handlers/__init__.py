@@ -10,4 +10,4 @@ from .best import best_handler
 from .random import random_handler
 from .song import song_handler
 from .calc import calc_handler
-from .end import end_handler
+from .post import post_handler

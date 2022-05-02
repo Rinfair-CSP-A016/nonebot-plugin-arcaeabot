@@ -4,7 +4,6 @@ from nonebot.log import logger
 from ..matcher import arc
 from ..config import config
 from ..draw_text import draw_help
-from ..utils import is_error
 
 
 async def pre_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg()):
@@ -15,8 +14,5 @@ async def pre_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg(
     aua_ua = config.get_config("aua_ua")
     aua_url = config.get_config("aua_url")
     if (aua_ua == "SECRET" or aua_url == "URL"):
-        if is_error():
-            await arc.finish("ArcaeaUnlimitedApi is not configured!")
-        else:
-            await logger("ArcaeaUnlimitedApi is not configured!")
-            await arc.finish()
+        logger.error("ArcaeaUnlimitedApi is not configured!")
+        await arc.finish("ArcaeaUnlimitedApi is not configured!")

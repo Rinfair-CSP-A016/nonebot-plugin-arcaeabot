@@ -3,21 +3,15 @@ from nonebot.params import CommandArg
 from ..data import ArcInfo, UserInfo
 from ..matcher import arc
 from ..AUA import get_user_info
-from ..utils import is_error
 
 
 async def bind_handler(bot: Bot, event: MessageEvent, args=CommandArg()):
     args: list = str(args).split()
 
     if args[0] == "bind":
-        arc_id = args[1]
-
-        # Expection
         if len(args) == 1:
             await arc.finish(MessageSegment.reply(event.message_id) + "缺少参数 arcaea_id！")
-
-        if is_error(mode="more") and len(args) >= 3:
-            await arc.send(MessageSegment.reply(event.message_id) + "过多的命令参数！")
+        arc_id = args[1]
 
         arc_info = ArcInfo.get_or_none(ArcInfo.arcaea_name == arc_id)
         arc_info2 = ArcInfo.get_or_none(ArcInfo.arcaea_id == arc_id)

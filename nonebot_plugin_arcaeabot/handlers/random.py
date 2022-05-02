@@ -4,7 +4,7 @@ from nonebot.params import CommandArg
 from ..main import arc
 from ..draw_text import draw_song
 from .._RHelper import RHelper
-from ..utils import is_float_num, is_error
+from ..utils import is_float_num
 import json
 
 root = RHelper()
@@ -31,9 +31,6 @@ async def random_handler(bot: Bot, event: MessageEvent, args: Message = CommandA
                 min = float(args[1].strip()) * 10
             if is_float_num(args[2]): 
                 max = float(args[2].strip()) * 10
-
-        if is_error(mode="more") and len(args) >= 4:
-            await arc.send(MessageSegment.reply(event.message_id) + "过多的命令参数！")
 
         if min > max:
             await arc.finish(MessageSegment.reply(event.message_id) + "最小难度大于最大难度")

@@ -5,7 +5,6 @@ from ..main import arc
 from ..draw_image import UserArcaeaInfo
 from .._RHelper import RHelper
 import json
-from ..utils import is_error
 
 root = RHelper()
 
@@ -64,10 +63,7 @@ async def best_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
             await arc.finish(MessageSegment.reply(event.message_id) + "你还没绑定呢！")
 
         if UserArcaeaInfo.is_querying(user_info.arcaea_id):
-            if is_error():
-                await arc.finish(MessageSegment.reply(event.message_id) + "您已在查询队列, 请勿重复发起查询。")
-            else:
-                await arc.finish()
+            await arc.finish(MessageSegment.reply(event.message_id) + "您已在查询队列, 请勿重复发起查询。")
 
         # Query
         result = await UserArcaeaInfo.draw_user_best(
