@@ -4,8 +4,7 @@ from nonebot.params import CommandArg
 from ..main import arc
 from ..draw_text import draw_song
 from .._RHelper import RHelper
-from ..utils import is_float_num
-import json
+from ..utils import is_float_num, json
 
 root = RHelper()
 

@@ -1,3 +1,9 @@
+try:
+    import ujson as json
+except ImportError:
+    import json
+
+
 def is_float_num(str):
     s = str.split(".")
     if len(s) != 2:

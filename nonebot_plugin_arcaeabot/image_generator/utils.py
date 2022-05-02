@@ -3,11 +3,6 @@ from typing import Tuple
 from time import localtime, strftime
 
 try:
-    import ujson as json
-except ImportError:
-    import json
-
-try:
     from numpy import average
 except ImportError:
 
