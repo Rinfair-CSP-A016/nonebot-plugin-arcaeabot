@@ -1,5 +1,9 @@
 # Change
 
+## [2.1.1](https://pypi.org/project/nonebot-plugin-arcaeabot/2.1.1/)
+- 修复有时ptt显示没有两位小数的问题
+- assets_update 新增--purge可选参数，用于彻底更新资源文件
+
 ## [2.1.0](https://pypi.org/project/nonebot-plugin-arcaeabot/2.1.0/)
 - 新增arc random 随机推荐曲目
 - 新增arc song 曲目信息查询
