@@ -16,11 +16,11 @@ async def assets_update_handler(
     if args[0] == "assets_update":
         if len(args) == 2:
             if args[1] == "--purge":
-                if path.exist(root.assets.song):
+                if path.exists(root.assets.song):
                     rmtree(root.assets.song)
-                if path.exist(root.assets.char):
+                if path.exists(root.assets.char):
                     rmtree(root.assets.char)
-                if path.exist(root.assets / ("slst.json")):
+                if path.exists(root.assets / ("slst.json")):
                     remove(root.assets / ("slst.json"))
 
         await arc.send("正在更新，请关注控制台更新进度…")
