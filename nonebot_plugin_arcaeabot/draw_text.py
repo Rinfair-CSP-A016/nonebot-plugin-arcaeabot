@@ -26,7 +26,7 @@ def draw_help():
 def draw_song(song_info: Dict, difficulty: str = "all"):
 
     if difficulty == "all":
-        image = root.assets.song / song_info["song_id"] / "base.jpg"
+        image = "file://" + root.assets.song / song_info["song_id"] / ("base.jpg")
         result = "Name: " + song_info["difficulties"][0]["name_en"] + "\n"
         for i, value in enumerate(song_info["difficulties"]):
             _diff: float = value["rating"] / 10
@@ -41,7 +41,7 @@ def draw_song(song_info: Dict, difficulty: str = "all"):
     else:
         difficulty = int(difficulty)
         cover_name = "3.jpg" if difficulty == 3 else "base.jpg"
-        image = root.assets.song / song_info["song_id"] / cover_name
+        image = "file://" + root.assets.song / song_info["song_id"] / cover_name
         song_info = song_info["difficulties"][difficulty]
         _diff: float = song_info["rating"] / 10
         _minite = str(int(int(song_info["time"]) / 60))
