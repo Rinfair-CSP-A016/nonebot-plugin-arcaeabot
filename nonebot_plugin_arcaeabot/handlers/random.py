@@ -29,7 +29,7 @@ async def random_handler(bot: Bot, event: MessageEvent, args: Message = CommandA
 
             if is_float_num(args[1]):
                 min = float(args[1].strip()) * 10
-            if is_float_num(args[2]): 
+            if is_float_num(args[2]):
                 max = float(args[2].strip()) * 10
 
         if min > max:
@@ -56,4 +56,6 @@ async def random_handler(bot: Bot, event: MessageEvent, args: Message = CommandA
         if song == "no_song":
             await arc.finish(MessageSegment.reply(event.message_id) + "此难度下不存在歌曲")
 
-        await arc.finish(MessageSegment.reply(event.message_id) + draw_song(song_info=song))
+        await arc.finish(
+            MessageSegment.reply(event.message_id) + draw_song(song_info=song)
+        )

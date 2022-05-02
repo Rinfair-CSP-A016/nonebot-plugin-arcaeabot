@@ -1,6 +1,5 @@
 from PIL import Image, ImageFont, ImageDraw
-from .assets import StaticPath
-from typing import Tuple, Dict
+from typing import Tuple
 from time import localtime, strftime
 
 try:

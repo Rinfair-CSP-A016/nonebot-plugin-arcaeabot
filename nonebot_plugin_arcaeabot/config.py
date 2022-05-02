@@ -8,8 +8,6 @@ New_map = {
     "aua_url": "URL",
     "aua_ua": "SECRET",
     "src_url": "http://107.182.17.60:17777/api/",
-    "error_message": "true",
-    "more_error_message": "false",
 }
 
 

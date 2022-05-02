@@ -1,5 +1,5 @@
 def is_float_num(str):
-    s = str.split('.')
+    s = str.split(".")
     if len(s) != 2:
         return False
     else:
