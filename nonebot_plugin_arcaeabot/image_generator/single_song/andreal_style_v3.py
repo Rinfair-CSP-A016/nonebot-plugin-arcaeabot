@@ -6,9 +6,9 @@ from ..utils import (
     DataText,
     draw_text,
     player_time_format,
-    StaticPath,
     choice_ptt_background,
 )
+from ..assets import StaticPath
 
 
 def draw_single_song(data: Union[UserRecent, UserBest]):
