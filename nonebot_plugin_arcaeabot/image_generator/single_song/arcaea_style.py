@@ -2,10 +2,12 @@ from PIL import Image
 from ..assets import StaticPath
 from ..utils import open_img, DataText, draw_text, choice_ptt_background
 from typing import Union
-from ...AUA import UserRecent, SongInfo, AccountInfo, UserBest
+from ...AUA import SongInfo, AccountInfo
+from ...AUA.schema.api.v5.user_best import Content as UserBestContent
+from ...AUA.schema.api.v5.user_recent import Content as UserRecentContent
 
 
-def draw_data(data: Union[UserRecent, UserBest]):
+def draw_data(data: Union[UserBestContent, UserRecentContent]):
     # User Info
     account_info: AccountInfo = data.account_info
     arcaea_id: str = account_info.code
@@ -20,7 +22,7 @@ def draw_data(data: Union[UserRecent, UserBest]):
     )
     rating: str = account_info.rating
     # Score Info
-    if isinstance(data, UserRecent):
+    if isinstance(data, UserRecentContent):
         score_info = data.recent_score[0]
     else:
         score_info = data.record

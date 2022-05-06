@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 
 from ...basemodel import Base
@@ -50,7 +50,13 @@ from .song_info import SongInfo
 """
 
 
-class UserBest(Base):
+class Content(Base):
     account_info: AccountInfo
     record: SongScore
     songinfo: List[SongInfo]
+
+
+class UserBest(Base):
+    status: int
+    message: Optional[str]
+    content: Optional[Content]

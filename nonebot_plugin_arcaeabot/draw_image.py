@@ -1,4 +1,5 @@
 from nonebot.adapters.onebot.v11 import MessageSegment
+from nonebot_plugin_arcaeabot.AUA.schema.api.v5.user_best30 import UserBest30
 from . import image_generator
 from io import BytesIO
 from .AUA import get_user_best, get_user_b30, get_user_recent, UserRecent, UserBest
@@ -15,58 +16,51 @@ class UserArcaeaInfo:
     async def draw_user_b30(arcaea_id: str):
         UserArcaeaInfo.querying.append(arcaea_id)
         try:
-            data = await get_user_b30(arcaea_id=arcaea_id, overflow=10)
-            if data["status"] != 0:
-                UserArcaeaInfo.querying.remove(arcaea_id)
-                return str(data["status"]) + ": " + data["message"]
-            else:
-                image = image_generator.draw_user_b30(data=data["content"])
-                buffer = BytesIO()
-                image.save(buffer, "png")
-                UserArcaeaInfo.querying.remove(arcaea_id)
-                return MessageSegment.image(buffer)
+            resp = await get_user_b30(arcaea_id=arcaea_id, overflow=10)
+            data = UserBest30(**resp)
+            if error_message := data.message:
+                return error_message
+            image = image_generator.draw_user_b30(data=data.content)
+            buffer = BytesIO()
+            image.save(buffer, "png")
+            return MessageSegment.image(buffer)
         except Exception as e:
-            UserArcaeaInfo.querying.remove(arcaea_id)
             return str(e)
+        finally:
+            UserArcaeaInfo.querying.remove(arcaea_id)
 
     @staticmethod
     async def draw_user_recent(arcaea_id: str):
         UserArcaeaInfo.querying.append(arcaea_id)
         try:
-            data = await get_user_recent(arcaea_id=arcaea_id)
-            if data["status"] != 0:
-                UserArcaeaInfo.querying.remove(arcaea_id)
-                return str(data["status"]) + ": " + data["message"]
-            else:
-                image = image_generator.draw_single_song(
-                    data=UserRecent(**data["content"])
-                )
-                buffer = BytesIO()
-                image.save(buffer, "png")
-                UserArcaeaInfo.querying.remove(arcaea_id)
-                return MessageSegment.image(buffer)
-        except Exception as e:
+            resp = await get_user_recent(arcaea_id=arcaea_id)
+            data = UserRecent(**resp)
+            if error_message := data.message:
+                return error_message
+            image = image_generator.draw_single_song(data=data.content)
+            buffer = BytesIO()
+            image.save(buffer, "png")
+            return MessageSegment.image(buffer)
+        #        except Exception as e:
+        #            return str(e)
+        finally:
             UserArcaeaInfo.querying.remove(arcaea_id)
-            return str(e)
 
     @staticmethod
     async def draw_user_best(arcaea_id: str, song_id: str, difficulty: str):
         UserArcaeaInfo.querying.append(arcaea_id)
         try:
-            data = await get_user_best(
+            resp = await get_user_best(
                 arcaea_id=arcaea_id, song_id=song_id, difficulty=difficulty
             )
-            if data["status"] != 0:
-                UserArcaeaInfo.querying.remove(arcaea_id)
-                return str(data["status"]) + ": " + data["message"]
-            else:
-                image = image_generator.draw_single_song(
-                    data=UserBest(**data["content"])
-                )
-                buffer = BytesIO()
-                image.save(buffer, "png")
-                UserArcaeaInfo.querying.remove(arcaea_id)
-                return MessageSegment.image(buffer)
-        except Exception as e:
+            data = UserBest(**resp)
+            if error_message := data.message:
+                return error_message
+            image = image_generator.draw_single_song(data=data.content)
+            buffer = BytesIO()
+            image.save(buffer, "png")
+            return MessageSegment.image(buffer)
+        #        except Exception as e:
+        #            return str(e)
+        finally:
             UserArcaeaInfo.querying.remove(arcaea_id)
-            return str(e)

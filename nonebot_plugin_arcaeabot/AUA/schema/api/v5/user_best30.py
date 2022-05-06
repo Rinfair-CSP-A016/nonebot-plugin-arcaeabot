@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 
 from ...basemodel import Base
@@ -65,7 +65,7 @@ from .song_info import SongInfo
 """
 
 
-class UserBest30(Base):
+class Content(Base):
     best30_avg: float
     recent10_avg: float
     account_info: AccountInfo
@@ -73,3 +73,9 @@ class UserBest30(Base):
     best30_overflow: List[SongScore]
     best30_songinfo: List[SongInfo]
     best30_overflow_songinfo: List[SongInfo]
+
+
+class UserBest30(Base):
+    status: int
+    message: Optional[str]
+    content: Optional[Content]

@@ -1,17 +1,18 @@
 from typing import Union
-from ...AUA import AccountInfo, UserRecent, SongInfo, UserBest
+from ...AUA import SongInfo, AccountInfo
+from ...AUA.schema.api.v5.user_best import Content as UserBestContent
+from ...AUA.schema.api.v5.user_recent import Content as UserRecentContent
 from PIL import Image, ImageFilter
 from ..utils import (
     open_img,
     DataText,
     draw_text,
-    player_time_format,
     choice_ptt_background,
 )
 from ..assets import StaticPath
 
 
-def draw_single_song(data: Union[UserRecent, UserBest]):
+def draw_single_song(data: Union[UserBestContent, UserRecentContent]):
     # User Info
     account_info: AccountInfo = data.account_info
     arcaea_id: str = account_info.code
@@ -26,7 +27,7 @@ def draw_single_song(data: Union[UserRecent, UserBest]):
     )
     rating: str = account_info.rating
     # Score Info
-    if isinstance(data, UserRecent):
+    if isinstance(data, UserRecentContent):
         score_info = data.recent_score[0]
     else:
         score_info = data.record
@@ -84,7 +85,11 @@ def draw_single_song(data: Union[UserRecent, UserBest]):
     write_PLAYTIME = DataText(65, 820, 20, "Play Time:", StaticPath.exo_regular)
     image = draw_text(image, write_PLAYTIME, (110, 110, 110))
     write_playtime = DataText(
-        160, 823, 17, player_time_format(score_info.time_played), StaticPath.exo_regular
+        160,
+        823,
+        17,
+        score_info.time_played.strftime("%Y-%m-%d %H:%M:%S"),
+        StaticPath.exo_regular,
     )
     image = draw_text(image, write_playtime, (110, 110, 110))
     write_song_name = DataText(

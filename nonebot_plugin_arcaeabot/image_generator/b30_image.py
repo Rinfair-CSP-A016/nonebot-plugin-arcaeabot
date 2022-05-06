@@ -1,17 +1,17 @@
 from PIL import Image, ImageEnhance
-from typing import Tuple, Dict
+from typing import Tuple
 
 from .assets import StaticPath
 from .utils import (
     open_img,
     get_average_color,
     is_dark,
-    player_time_format,
     DataText,
     draw_text,
     choice_ptt_background,
 )
-from ..AUA import UserBest30, SongInfo, SongScore
+from ..AUA import SongInfo, SongScore
+from ..AUA.schema.api.v5.user_best30 import Content as UserBest30Content
 
 
 def draw_score_bg(
@@ -105,7 +105,7 @@ def draw_score_detail(
         250,
         230,
         25,
-        player_time_format(song_score.time_played),
+        song_score.time_played.strftime("%Y-%m-%d %H:%M:%S"),
         StaticPath.kazesawa_regular,
     )
     text_overlay = draw_text(text_overlay, write_time, average_color)
@@ -127,9 +127,9 @@ def draw_score_detail(
     return image
 
 
-def draw_user_b30(data: Dict):
+def draw_user_b30(data: UserBest30Content):
     B30_bg = open_img(StaticPath.B30_bg)
-    user_best30 = UserBest30(**data)
+    user_best30 = data
     # User Info
     best: float = user_best30.best30_avg
     recent: float = user_best30.recent10_avg
