@@ -41,8 +41,8 @@ class UserArcaeaInfo:
             buffer = BytesIO()
             image.save(buffer, "png")
             return MessageSegment.image(buffer)
-        #        except Exception as e:
-        #            return str(e)
+        except Exception as e:
+            return str(e)
         finally:
             UserArcaeaInfo.querying.remove(arcaea_id)
 
@@ -60,7 +60,7 @@ class UserArcaeaInfo:
             buffer = BytesIO()
             image.save(buffer, "png")
             return MessageSegment.image(buffer)
-        #        except Exception as e:
-        #            return str(e)
+        except Exception as e:
+            return str(e)
         finally:
             UserArcaeaInfo.querying.remove(arcaea_id)
