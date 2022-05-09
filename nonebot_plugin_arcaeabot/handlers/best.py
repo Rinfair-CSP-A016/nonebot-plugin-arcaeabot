@@ -6,8 +6,8 @@ from ..draw_image import UserArcaeaInfo
 from .._RHelper import RHelper
 from typing import Dict
 from ..AUA.request import get_song_alias
-from ..AUA.schema.api.another.song_random import SongRandom
 from ..AUA.schema.utils import diffstr2num
+from ..AUA.schema.api.another.song_alias import SongAlias
 
 root = RHelper()
 
@@ -32,7 +32,7 @@ async def best_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
 
         # Query
         resp = await get_song_alias(songname)
-        data = SongRandom(**resp)
+        data = SongAlias(**resp)
         if error_message := data.message:
             await arc.finish(
                 MessageSegment.reply(event.message_id) + str(error_message)
