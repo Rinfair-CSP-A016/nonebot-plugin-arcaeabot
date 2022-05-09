@@ -6,7 +6,7 @@ from ..draw_text import draw_song
 from .._RHelper import RHelper
 from ..AUA.request import get_song_random
 from ..AUA.schema.api.another.song_random import SongRandom
-from AUA.schema.utils import diffstr2num
+from ..AUA.schema.utils import diffstr2num
 
 
 root = RHelper()

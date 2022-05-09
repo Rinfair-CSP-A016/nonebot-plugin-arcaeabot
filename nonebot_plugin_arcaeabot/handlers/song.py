@@ -6,7 +6,7 @@ from .._RHelper import RHelper
 from typing import Dict
 from ..AUA.request import get_song_info
 from ..AUA.schema.api.another.song_info_detail import SongInfoDetail
-from AUA.schema.utils import diffstr2num
+from ..AUA.schema.utils import diffstr2num
 
 root = RHelper()
 
