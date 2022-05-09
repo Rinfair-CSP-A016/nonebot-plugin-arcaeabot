@@ -5,9 +5,9 @@ from ..main import arc
 from ..draw_image import UserArcaeaInfo
 from .._RHelper import RHelper
 from typing import Dict
-from AUA.request import get_song_alias
-from AUA.schema.api.another.song_random import SongRandom
-from AUA.schema.utils import diffstr2num
+from ..AUA.request import get_song_alias
+from ..AUA.schema.api.another.song_random import SongRandom
+from ..AUA.schema.utils import diffstr2num
 
 root = RHelper()
 
