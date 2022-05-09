@@ -21,7 +21,6 @@ async def random_handler(bot: Bot, event: MessageEvent, args: Message = CommandA
         difficulty = args.get(3, -1)
         resp = await get_song_random(start, end, difficulty)
         data = SongRandom(**resp)
-        print(data.content.dict())
-#        if error_message := data.message or str(data.detail):
-#            await arc.finish(MessageSegment.reply(event.message_id) + error_message)
+        if error_message := data.message or data.detail:
+            await arc.finish(MessageSegment.reply(event.message_id) + str(error_message))
         await arc.finish(MessageSegment.reply(event.message_id) + draw_song(data.content))

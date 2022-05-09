@@ -25,7 +25,7 @@ def draw_help():
 
 
 def draw_song(song_info: SongRandomContent):
-    if isinstance(song_info, List[SongInfo]):
+    if not isinstance(song_info.song_info, SongInfo):
         image = "file://" + root.assets.song / song_info.song_id / ("base.jpg")
         result = "\n".join(
             [
@@ -35,7 +35,7 @@ def draw_song(song_info: SongRandomContent):
                 f"[Future]: {song_info.song_info[2].rating/10}",
             ]
         )
-        result += f"\n[Beyond]: {song_info.song_info[3].rating}/10" if song_info.song_info[3] else []
+        result += f"\n[Beyond]: {song_info.song_info[3].rating/10}" if len(song_info.song_info)>3 else ""
         result += "\n获取详细信息请在添加难度后缀"
     else:
         difficulty = ["Past", "Present", "Future", "Beyond"][song_info.difficulty]
@@ -52,7 +52,7 @@ def draw_song(song_info: SongRandomContent):
                 f"Note数: {song_info.song_info.note}",
                 f"Rating: {song_info.song_info.rating/10}",
                 f"隶属曲包: {song_info.song_info.set_friendly}",
-                "上线时间: "+song_info.song_info.date.strftime("%Y-%m-%d %H:%M:%S"),
+                "上线时间: "+song_info.song_info.date.strftime("%Y-%m-%d"),
             ]
         )
         result += "\n需要世界模式解锁" if song_info.song_info.world_unlock is True else ""
