@@ -4,60 +4,23 @@ from ..data import UserInfo
 from ..main import arc
 from ..draw_image import UserArcaeaInfo
 from .._RHelper import RHelper
-import ujson as json
+from typing import Dict
+from AUA.request import get_song_alias
+from AUA.schema.api.another.song_random import SongRandom
+from AUA.schema.utils import diffstr2num
 
 root = RHelper()
 
 
 async def best_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg()):
     args: list = str(args).split()
-    if args[0] == "best":
+    args: Dict = {i: v for i, v in enumerate(args)}
+    if args.get(0, None) == "song":
         user_info = UserInfo.get_or_none(UserInfo.user_qq == event.user_id)
-
-        slst_json = root.assets / ("slst.json")
-        with open(slst_json, "r") as file:
-            data = json.load(file)
-
-        difficulty = 233
-        if args[-1].strip().lower() == "byd":
-            difficulty = 3
-        elif args[-1].strip().lower() == "ftr":
-            difficulty = 2
-        elif args[-1].strip().lower() == "prs":
-            difficulty = 1
-        elif args[-1].strip().lower() == "pst":
-            difficulty = 0
-
-        if 0 <= difficulty <= 3:
-            song_id = " ".join(args[1:-1])
-        else:
-            song_id = " ".join(args[1:])
-
-        song = "no_song"
-        for s in data["songs"]:
-            if s["song_id"] == song_id:
-                song = s
-            if (
-                s["difficulties"][0]["name_en"] == song_id
-                or s["difficulties"][0]["name_jp"] == song_id
-            ):
-                song = s
-            if len(s["difficulties"]) == 4:
-                if (
-                    s["difficulties"][3]["name_en"] == song_id
-                    or s["difficulties"][3]["name_jp"] == song_id
-                ):
-                    song = s
-            for alias in s["alias"]:
-                if alias == song_id:
-                    song = s
-        # check
-        if song == "no_song":
-            await arc.finish(MessageSegment.reply(event.message_id) + "曲目不存在！")
-
-        if len(song["difficulties"]) == 3 and difficulty == 3:
-            await arc.finish(MessageSegment.reply(event.message_id) + "难度不存在！")
-
+        # get args
+        songname = args.get(1, None)
+        difficulty = args.get(2, "FTR")
+        difficulty = diffstr2num(difficulty.upper())
         # Exception
         if not user_info:
             await arc.finish(MessageSegment.reply(event.message_id) + "你还没绑定呢！")
@@ -68,9 +31,15 @@ async def best_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
             )
 
         # Query
+        resp = await get_song_alias(songname)
+        data = SongRandom(**resp)
+        if error_message := data.message:
+            await arc.finish(
+                MessageSegment.reply(event.message_id) + str(error_message)
+            )
         result = await UserArcaeaInfo.draw_user_best(
             arcaea_id=user_info.arcaea_id,
-            song_id=song["song_id"],
+            song_id=data.content.song_id,
             difficulty=str(difficulty),
         )
         await arc.finish(MessageSegment.reply(event.message_id) + result)

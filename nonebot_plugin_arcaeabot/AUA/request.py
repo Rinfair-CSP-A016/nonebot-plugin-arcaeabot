@@ -64,8 +64,6 @@ async def get_user_best(
         return res.json()
 
 
-
-
 # another
 async def get_song_alias(songname: str):
     url = config.get_config("src_url")
@@ -81,6 +79,7 @@ async def get_song_random(start: float = 0, end: float = 20, difficulty: int = -
     async with AsyncClient() as client:
         resp = await client.get(real_url)
     return resp.json()
+
 
 async def get_song_info(songname: str, difficulty: int):
     url = config.get_config("src_url")

@@ -37,10 +37,12 @@ from ..v5.song_info import SongInfo
 }
 """
 
+
 class Content(Base):
     song_id: str
     song_info: Union[List[SongInfo], SongInfo]
     difficulty: int
+
 
 class SongInfoDetail(Base):
     status: Optional[int]
