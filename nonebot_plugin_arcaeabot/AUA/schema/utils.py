@@ -8,5 +8,6 @@ def diffstr2num(diff: str):
         "FTR": 2,
         "BEYOND": 3,
         "BYD": 3,
+        "ALL": -1,
     }
     return diff_dict.get(diff, 2)

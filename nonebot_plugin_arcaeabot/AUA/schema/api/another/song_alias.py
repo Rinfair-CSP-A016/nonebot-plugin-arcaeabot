@@ -24,6 +24,5 @@ class Content(Base):
 
 class SongAlias(Base):
     status: Optional[int]
-    detail: Union[str, List, None]
-    message = Optional[str]
-    content = Optional[Content]
+    message: Optional[str]
+    content: Optional[Content]

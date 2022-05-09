@@ -17,7 +17,7 @@ async def song_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
     if args.get(0, None) == "song":
         # get args
         songname = args.get(1, None)
-        difficulty = args.get(2, "FTR")
+        difficulty = args.get(2, "ALL")
         difficulty = diffstr2num(difficulty.upper())
         resp = await get_song_info(songname, difficulty)
         data = SongInfoDetail(**resp)

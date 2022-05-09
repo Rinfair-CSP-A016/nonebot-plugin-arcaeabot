@@ -46,6 +46,5 @@ class Content(Base):
 
 class SongInfoDetail(Base):
     status: Optional[int]
-    detail: Union[str, list, None]
     message: Optional[str]
     content: Optional[Content]

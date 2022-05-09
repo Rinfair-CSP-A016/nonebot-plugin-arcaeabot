@@ -15,7 +15,7 @@ root = RHelper()
 async def best_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg()):
     args: list = str(args).split()
     args: Dict = {i: v for i, v in enumerate(args)}
-    if args.get(0, None) == "song":
+    if args.get(0, None) == "best":
         user_info = UserInfo.get_or_none(UserInfo.user_qq == event.user_id)
         # get args
         songname = args.get(1, None)

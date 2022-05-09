@@ -44,6 +44,5 @@ class Content(Base):
 
 class SongRandom(Base):
     status: Optional[int]
-    detail: Union[str, List, None]
     message: Optional[str]
     content: Optional[Content]

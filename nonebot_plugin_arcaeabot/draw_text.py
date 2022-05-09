@@ -50,7 +50,7 @@ def draw_song(song_info: SongRandomContent):
                 f"曲名: {song_info.song_info.name_en}[{difficulty}]",
                 f"曲师: {song_info.song_info.artist}",
                 f"曲绘: {song_info.song_info.jacket_designer}",
-                f"时长: {song_info.song_info.time}",
+                f"时长: " + "%02d:%02d" % divmod(song_info.song_info.time, 60),
                 f"BPM:  {song_info.song_info.bpm}",
                 f"谱师: {song_info.song_info.chart_designer}",
                 f"Note数: {song_info.song_info.note}",

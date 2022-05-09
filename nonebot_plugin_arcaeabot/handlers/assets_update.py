@@ -20,8 +20,6 @@ async def assets_update_handler(
                     rmtree(root.assets.song)
                 if path.exists(root.assets.char):
                     rmtree(root.assets.char)
-                if path.exists(root.assets / ("slst.json")):
-                    remove(root.assets / ("slst.json"))
 
         await arc.send("正在更新，请关注控制台更新进度…")
         result_song = await check_song_update()

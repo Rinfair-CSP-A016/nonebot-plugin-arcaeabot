@@ -19,7 +19,7 @@ async def random_handler(bot: Bot, event: MessageEvent, args: Message = CommandA
         # get args
         start = args.get(1, 0)
         end = args.get(2, 20)
-        difficulty = args.get(2, "FTR")
+        difficulty = args.get(2, "ALL")
         difficulty = diffstr2num(difficulty.upper())
         resp = await get_song_random(start, end, difficulty)
         data = SongRandom(**resp)
