@@ -1,0 +1,29 @@
+from ctypes import Union
+from ...basemodel import Base
+from typing import Optional, List
+
+"""
+{
+  "status": 0,
+  "content": {
+    "song_id": "climax",
+    "alias": [
+      "高潮",
+      "妖艳魔男",
+      "妖艳猛男"
+    ]
+  }
+}
+"""
+
+
+class Content(Base):
+    song_id: str
+    alias: List[str]
+
+
+class SongAlias(Base):
+    status: Optional[int]
+    detail: Union[str, List, None]
+    message = Optional[str]
+    content = Optional[Content]

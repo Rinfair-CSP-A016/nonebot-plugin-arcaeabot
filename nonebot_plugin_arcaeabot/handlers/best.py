@@ -4,7 +4,7 @@ from ..data import UserInfo
 from ..main import arc
 from ..draw_image import UserArcaeaInfo
 from .._RHelper import RHelper
-from ..utils import json
+import ujson as json
 
 root = RHelper()
 

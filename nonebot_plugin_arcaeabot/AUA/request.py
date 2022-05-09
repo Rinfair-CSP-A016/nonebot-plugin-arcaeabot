@@ -3,6 +3,7 @@ from httpx import AsyncClient
 from ..config import config
 
 
+# AUA
 async def get_user_info(arcaea_id: str, recent: bool = False) -> List[Dict]:
     async with AsyncClient() as client:
         # Config
@@ -63,16 +64,20 @@ async def get_user_best(
         return res.json()
 
 
-async def get_song_list() -> List[Dict]:
+
+
+# another
+async def get_song_alias(songname: str):
+    url = config.get_config("src_url")
+    real_url = f"{url}song/alias?songname={songname}"
     async with AsyncClient() as client:
-        # Config
-        aua_ua = config.get_config("aua_ua")
-        aua_url = config.get_config("aua_url")
-        headers = {"User-Agent": aua_ua}
-        # request
-        res = await client.get(
-            url=f"{aua_url}/botarcapi/song/list",
-            headers=headers,
-            timeout=100,
-        )
-        return res.json()
+        resp = await client.get(real_url)
+    return resp.json()
+
+
+async def get_song_random(start: float = 0, end: float = 20, difficulty: int = -1):
+    url = config.get_config("src_url")
+    real_url = f"{url}song/random?start={start}&end={end}&difficulty={difficulty}"
+    async with AsyncClient() as client:
+        resp = await client.get(real_url)
+    return resp.json()

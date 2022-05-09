@@ -1,7 +1,8 @@
-from typing import Dict
+from typing import List
 from nonebot.adapters.onebot.v11 import MessageSegment
 from ._RHelper import RHelper
-from .image_generator.utils import player_time_format
+from .AUA.schema.api.another.song_random import Content as SongRandomContent
+from .AUA.schema.api.v5.song_info import SongInfo
 
 root = RHelper()
 
@@ -23,52 +24,37 @@ def draw_help():
     )
 
 
-def draw_song(song_info: Dict, difficulty: str = "all"):
-
-    if difficulty == "all":
-        image = "file://" + root.assets.song / song_info["song_id"] / ("base.jpg")
-        result = "Name: " + song_info["difficulties"][0]["name_en"] + "\n"
-        for i, value in enumerate(song_info["difficulties"]):
-            _diff: float = value["rating"] / 10
-            result += (
-                "["
-                + ["Past", "Present", "Future", "Beyond"][i]
-                + "]: "
-                + str(_diff)
-                + "\n"
-            )
-        result += "获取详细信息请在添加难度后缀" + "\n"
-    else:
-        difficulty = int(difficulty)
-        cover_name = "3.jpg" if difficulty == 3 else "base.jpg"
-        image = "file://" + root.assets.song / song_info["song_id"] / cover_name
-        song_info = song_info["difficulties"][difficulty]
-        _diff: float = song_info["rating"] / 10
-        _minite = str(int(int(song_info["time"]) / 60))
-        _second = str(int(song_info["time"]) % 60)
-        _name = (
-            song_info["name_jp"] + " [" + song_info["name_en"] + "]"
-            if song_info["name_jp"] != ""
-            else song_info["name_en"]
-        )
+def draw_song(song_info: SongRandomContent):
+    if isinstance(song_info, List[SongInfo]):
+        image = "file://" + root.assets.song / song_info.song_id / ("base.jpg")
         result = "\n".join(
             [
-                "曲名: "
-                + _name
-                + " ["
-                + ["Past", "Present", "Future", "Beyond"][difficulty]
-                + "]",
-                "曲师: " + song_info["artist"],
-                "曲绘: " + song_info["jacket_designer"],
-                "时长: " + str(_minite) + ":" + str(_second),
-                "BPM: " + str(song_info["bpm"]),
-                "谱师: " + song_info["chart_designer"],
-                "Note数: " + str(song_info["note"]),
-                "Rating: " + str(_diff),
-                "隶属曲包: " + song_info["set_friendly"],
-                "上线时间: " + player_time_format(int(song_info["date"] / 10) * 10),
+                f"Name: {song_info.song_info[0].name_en}",
+                f"[Past]: {song_info.song_info[0].rating/10}",
+                f"[Present]: {song_info.song_info[1].rating/10}",
+                f"[Future]: {song_info.song_info[2].rating/10}",
             ]
         )
-        result += "\n需要世界模式解锁" if song_info["world_unlock"] is True else ""
-        result += "\n需要下载" if song_info["remote_download"] is True else ""
+        result += f"\n[Beyond]: {song_info.song_info[3].rating}/10" if song_info.song_info[3] else []
+        result += "\n获取详细信息请在添加难度后缀"
+    else:
+        difficulty = ["Past", "Present", "Future", "Beyond"][song_info.difficulty]
+        cover_name = "3.jpg" if difficulty == 3 else "base.jpg"
+        image = "file://" + root.assets.song / song_info.song_id / cover_name
+        result = "\n".join(
+            [
+                f"曲名: {song_info.song_info.name_en}[{difficulty}]",
+                f"曲师: {song_info.song_info.artist}",
+                f"曲绘: {song_info.song_info.jacket_designer}",
+                f"时长: {song_info.song_info.time}",
+                f"BPM:  {song_info.song_info.bpm}",
+                f"谱师: {song_info.song_info.chart_designer}",
+                f"Note数: {song_info.song_info.note}",
+                f"Rating: {song_info.song_info.rating/10}",
+                f"隶属曲包: {song_info.song_info.set_friendly}",
+                "上线时间: "+song_info.song_info.date.strftime("%Y-%m-%d %H:%M:%S"),
+            ]
+        )
+        result += "\n需要世界模式解锁" if song_info.song_info.world_unlock is True else ""
+        result += "\n需要下载" if song_info.song_info.remote_download is True else ""
     return MessageSegment.image(image) + "\n" + result
