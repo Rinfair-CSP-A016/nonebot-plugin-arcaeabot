@@ -1,5 +1,5 @@
 from nonebot.adapters.onebot.v11 import MessageSegment
-from nonebot_plugin_arcaeabot.AUA.schema.api.v5.user_best30 import UserBest30
+from .AUA.schema.api.v5.user_best30 import UserBest30
 from . import image_generator
 from io import BytesIO
 from .AUA import get_user_best, get_user_b30, get_user_recent, UserRecent, UserBest
