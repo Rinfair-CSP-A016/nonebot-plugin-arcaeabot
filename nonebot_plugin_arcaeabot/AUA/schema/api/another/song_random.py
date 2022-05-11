@@ -1,6 +1,6 @@
 from ...basemodel import Base
 from ..v5.song_info import SongInfo
-from typing import Optional
+from typing import List, Optional, Union
 
 """
 {
@@ -39,7 +39,7 @@ from typing import Optional
 class Content(Base):
     song_id: str
     difficulty: int
-    song_info: SongInfo
+    song_info: Union[SongInfo, List[SongInfo]]
 
 
 class SongRandom(Base):
