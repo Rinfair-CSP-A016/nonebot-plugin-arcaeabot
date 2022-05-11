@@ -1,6 +1,5 @@
 from PIL import Image, ImageFont, ImageDraw
 from typing import Tuple
-from time import localtime, strftime
 
 try:
     from numpy import average
@@ -37,11 +36,6 @@ def is_dark(color: Tuple[int, int, int]):
     return (
         True if color[0] * 0.299 + color[1] * 0.587 + color[2] * 0.114 < 192 else False
     )
-
-
-def player_time_format(time_stamp: int) -> str:
-    struct_time = localtime(time_stamp / 1000)
-    return strftime("%Y-%m-%d %H:%M:%S", struct_time)
 
 
 def choice_ptt_background(ptt: int):

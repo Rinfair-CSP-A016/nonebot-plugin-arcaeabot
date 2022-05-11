@@ -1,6 +1,6 @@
 from ...basemodel import Base
 from ..v5.song_info import SongInfo
-from typing import Union, Optional, List
+from typing import Optional
 
 """
 {

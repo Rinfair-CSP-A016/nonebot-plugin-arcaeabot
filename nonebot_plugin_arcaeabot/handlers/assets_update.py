@@ -2,7 +2,7 @@ from nonebot.adapters.onebot.v11 import Bot, MessageEvent, Message, MessageSegme
 from nonebot.params import CommandArg
 from ..matcher import arc
 from ..assets_updater import check_song_update, check_char_update
-from os import remove, path
+from os import path
 from .._RHelper import RHelper
 from shutil import rmtree
 

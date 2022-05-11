@@ -1,4 +1,3 @@
-from ctypes import Union
 from ...basemodel import Base
 from typing import Optional, List
 
