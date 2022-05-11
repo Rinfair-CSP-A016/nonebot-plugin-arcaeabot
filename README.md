@@ -46,7 +46,6 @@ Arcaea 查分器。
 
 ## To Do
 - 年报
-- 新的 recent 图片
 
 ## 参考代码
 

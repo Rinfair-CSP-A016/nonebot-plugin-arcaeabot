@@ -1,4 +1,7 @@
 # Change
+## [2.1.2](https://pypi.org/project/nonebot-plugin-arcaeabot/2.1.2/)
+- 曲目信息通过自建api服务器查询，降低AUA服务器压力.您可以在[这里](http://api.ritsuki.top/docs)查看用法
+- 调整代码结构
 
 ## [2.1.1](https://pypi.org/project/nonebot-plugin-arcaeabot/2.1.1/)
 - 修复有时ptt显示没有两位小数的问题
