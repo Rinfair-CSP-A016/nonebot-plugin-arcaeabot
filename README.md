@@ -42,7 +42,7 @@ Arcaea 查分器。
 | /arc b30                                    | 查询您的 best 30 记录                                              |
 | /arc best {songname} {difficulty}           | 查询您的单曲最佳记录                                               |
 | /arc song {songname} {difficulty}           | 查询歌曲信息                                                       |
-| /arc song {difficulty} {difficulty}         | 随机歌曲                                                          |
+| /arc random {start} {end} {difficulty}      | 随机歌曲                                                          |
 
 ## To Do
 - 年报
