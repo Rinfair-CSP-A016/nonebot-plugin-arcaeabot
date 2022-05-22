@@ -197,7 +197,6 @@ def draw_user_b30(data: UserBest30Content):
             draw_score_detail(
                 song_score=scoer_info,
                 rank=num,
-                song_id=scoer_info.song_id,
                 song_info=song_info,
                 mask=mask,
             ),
