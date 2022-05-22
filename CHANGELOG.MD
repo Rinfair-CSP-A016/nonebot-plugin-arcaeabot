@@ -1,4 +1,8 @@
 # Change
+## [2.1.4](https://pypi.org/project/nonebot-plugin-arcaeabot/2.1.4/)
+- 为什么没有2.1.3的ChangeLog【
+- 修复了一些bug
+
 ## [2.1.2](https://pypi.org/project/nonebot-plugin-arcaeabot/2.1.2/)
 - 曲目信息通过自建api服务器查询，降低AUA服务器压力.您可以在[这里](http://api.ritsuki.top/docs)查看用法
 - 调整代码结构
