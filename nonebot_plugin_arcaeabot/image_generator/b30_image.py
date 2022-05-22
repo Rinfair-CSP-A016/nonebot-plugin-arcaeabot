@@ -43,13 +43,12 @@ def draw_score_bg(
 def draw_score_detail(
     song_score: SongScore,
     rank: int,
-    song_id: str,
     song_info: SongInfo,
     mask: Image.Image,
 ) -> Image.Image:
     # Frame
     diff = song_score.difficulty
-    cover_name = "3.jpg" if diff == 3 else "base.jpg"
+    cover_name = "3.jpg" if song_info.jacket_override else "base.jpg"
     song_background = open_img(
         StaticPath.song_dir / song_score.song_id / cover_name
     ).resize((270, 270))

@@ -42,7 +42,7 @@ def draw_song(content: SongRandomContent):
         result += "\n获取详细信息请在添加难度后缀"
     else:
         difficulty = ["Past", "Present", "Future", "Beyond"][content.difficulty]
-        cover_name = "3.jpg" if difficulty == 3 else "base.jpg"
+        cover_name = "3.jpg" if content.song_info.jacket_override else "base.jpg"
         image = "file://" + root.assets.song / content.song_id / cover_name
         result = "\n".join(
             [
