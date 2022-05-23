@@ -25,7 +25,7 @@ def draw_help():
 
 def draw_song(content: SongRandomContent):
     if not isinstance(content.song_info, SongInfo):
-        image = "file://" + root.assets.song / content.song_id / ("base.jpg")
+        image = "file:///" + root.assets.song / content.song_id / ("base.jpg")
         result = "\n".join(
             [
                 f"Name: {content.song_info[0].name_en}",
@@ -43,7 +43,7 @@ def draw_song(content: SongRandomContent):
     else:
         difficulty = ["Past", "Present", "Future", "Beyond"][content.difficulty]
         cover_name = "3.jpg" if content.song_info.jacket_override else "base.jpg"
-        image = "file://" + root.assets.song / content.song_id / cover_name
+        image = "file:///" + root.assets.song / content.song_id / cover_name
         result = "\n".join(
             [
                 f"曲名: {content.song_info.name_en}[{difficulty}]",
