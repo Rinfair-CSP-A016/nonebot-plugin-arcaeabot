@@ -13,16 +13,13 @@ async def bind_handler(bot: Bot, event: MessageEvent, args=CommandArg()):
             await arc.finish(MessageSegment.reply(event.message_id) + "缺少参数 arcaea_id！")
         arc_id = args[1]
 
-        arc_info = ArcInfo.get_or_none(ArcInfo.arcaea_name == arc_id)
-        arc_info2 = ArcInfo.get_or_none(ArcInfo.arcaea_id == arc_id)
-        # get 2 info and check them
+        arc_info = ArcInfo.get_or_none(
+            (ArcInfo.arcaea_name == arc_id) | (ArcInfo.arcaea_id == arc_id)
+        )
+
         if arc_info:
             arc_id = arc_info.arcaea_id
             arc_name = arc_info.arcaea_name
-
-        elif arc_info2:
-            arc_id = arc_info2.arcaea_id
-            arc_name = arc_info2.arcaea_name
 
         elif not arc_id.isdigit() or (arc_id.isdigit() and len(arc_id) != 9):
             await arc.finish(

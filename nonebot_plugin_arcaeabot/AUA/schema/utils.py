@@ -10,4 +10,4 @@ def diffstr2num(diff: str):
         "BYD": 3,
         "ALL": -1,
     }
-    return diff_dict.get(diff, 2)
+    return diff_dict.get(diff, None)
