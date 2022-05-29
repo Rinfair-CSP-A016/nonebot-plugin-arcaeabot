@@ -1,5 +1,6 @@
 from PIL import Image, ImageFont, ImageDraw
 from typing import Tuple
+from time import localtime, strftime
 
 try:
     from numpy import average
@@ -13,6 +14,11 @@ def open_img(image_path: str) -> Image.Image:
     with open(image_path, "rb") as f:
         image = Image.open(f).convert("RGBA")
     return image
+
+
+def player_time_format(time_stamp: int) -> str:
+    struct_time = localtime(time_stamp)
+    return strftime("%Y-%m-%d %H:%M:%S", struct_time)
 
 
 def get_average_color(image: Image.Image):

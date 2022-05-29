@@ -9,6 +9,7 @@ from .utils import (
     DataText,
     draw_text,
     choice_ptt_background,
+    player_time_format,
 )
 from ..AUA import SongInfo, SongScore
 from ..AUA.schema.api.v5.user_best30 import Content as UserBest30Content
@@ -104,7 +105,7 @@ def draw_score_detail(
         250,
         230,
         25,
-        song_score.time_played.strftime("%Y-%m-%d %H:%M:%S"),
+        player_time_format(song_score.time_played.timestamp()),
         StaticPath.kazesawa_regular,
     )
     text_overlay = draw_text(text_overlay, write_time, average_color)

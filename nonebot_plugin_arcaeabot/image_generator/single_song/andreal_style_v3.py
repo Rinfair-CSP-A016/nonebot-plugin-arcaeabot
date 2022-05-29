@@ -8,6 +8,7 @@ from ..utils import (
     DataText,
     draw_text,
     choice_ptt_background,
+    player_time_format,
 )
 from ..assets import StaticPath
 
@@ -88,7 +89,7 @@ def draw_single_song(data: Union[UserBestContent, UserRecentContent]):
         160,
         823,
         17,
-        score_info.time_played.strftime("%Y-%m-%d %H:%M:%S"),
+        player_time_format(score_info.time_played.timestamp()),
         StaticPath.exo_regular,
     )
     image = draw_text(image, write_playtime, (110, 110, 110))
