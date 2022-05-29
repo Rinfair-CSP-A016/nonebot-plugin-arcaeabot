@@ -15,7 +15,7 @@ async def song_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
     """
         /arc song Fracture Ray ftr
     """
-    if len(args) >= 3 and args[0] == "song":
+    if len(args) >= 2 and args[0] == "song":
         # get args
         if difficulty := diffstr2num(args[-1].upper()):
             songname = " ".join(args[1:-1])
