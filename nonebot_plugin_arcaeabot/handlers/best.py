@@ -16,7 +16,7 @@ async def best_handler(bot: Bot, event: MessageEvent, args: Message = CommandArg
     """
         /arc best Fracture Ray ftr
     """
-    if len(args) >= 3 and args[0] == "best":
+    if len(args) >= 2 and args[0] == "best":
         user_info = UserInfo.get_or_none(UserInfo.user_qq == event.user_id)
         # get args
         if difficulty := diffstr2num(args[-1].upper()):
