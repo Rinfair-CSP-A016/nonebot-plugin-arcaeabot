@@ -49,6 +49,7 @@ class StaticPath:
     kazesawa_light = root.assets.font / ("Kazesawa-Light.ttf")
     kazesawa_regular = root.assets.font / ("Kazesawa-Regular.ttf")
     notosanscjksc_regular = root.assets.font / ("NotoSansCJKsc-Regular.otf")
+    roboto_regular = root.assets.font / ("Roboto-Regular.ttf")
 
     # Recent
     recent_background = root.assets.recent / ("recent_bg.png")

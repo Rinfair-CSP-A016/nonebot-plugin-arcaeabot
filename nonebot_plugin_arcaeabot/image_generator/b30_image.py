@@ -63,7 +63,7 @@ def draw_score_detail(
     song_name = song_info.name_en
     song_name = song_name if len(song_name) < 19 else song_name[:18] + "…"
     text_overlay = Image.new("RGBA", (560, 270), (0, 0, 0, 0))
-    write_song_name = DataText(45, 32, 40, song_name, StaticPath.kazesawa_regular)
+    write_song_name = DataText(45, 32, 40, song_name, StaticPath.roboto_regular)
     text_overlay = draw_text(text_overlay, write_song_name, average_color)
     write_score = DataText(45, 80, 40, f"{song_score.score:,}", StaticPath.exo_medium)
     text_overlay = draw_text(text_overlay, write_score, average_color)

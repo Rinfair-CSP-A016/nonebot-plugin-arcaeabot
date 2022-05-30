@@ -93,9 +93,7 @@ def draw_single_song(data: Union[UserBestContent, UserRecentContent]):
         StaticPath.exo_regular,
     )
     image = draw_text(image, write_playtime, (110, 110, 110))
-    write_song_name = DataText(
-        300, 520, 25, song_name, StaticPath.kazesawa_regular, "mt"
-    )
+    write_song_name = DataText(300, 520, 25, song_name, StaticPath.roboto_regular, "mt")
     image = draw_text(image, write_song_name, "black")
     write_difficulty = DataText(
         300,

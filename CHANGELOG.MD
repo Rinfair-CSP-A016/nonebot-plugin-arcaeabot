@@ -1,4 +1,7 @@
 # Change
+## [2.1.8](https://pypi.org/project/nonebot-plugin-arcaeabot/2.1.8/)
+- 修复了一些歌名显示错误（点名nέο κόsmo）
+
 ## [2.1.4](https://pypi.org/project/nonebot-plugin-arcaeabot/2.1.4/)
 - 为什么没有2.1.3的ChangeLog【
 - 修复了一些bug
